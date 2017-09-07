@@ -9,6 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ProductDetailComponent implements OnInit {
   pageTitle: string = 'Product Detail';
   product: IProduct;
+  imageWidth: number = 180;
 
   constructor(private _route: ActivatedRoute,
               private _router: Router) { 
@@ -28,7 +29,7 @@ export class ProductDetailComponent implements OnInit {
       "releaseDate": "March 19, 2016",
       "description": "Leaf rake bla blaaa blaaah",
       "price": 666,
-      "starRating": 0,
+      "starRating": 3.5,
       "imageUrl": "http://openclipart.org/image/300px/svg_to_png/26215/Anonymous_Leaf_Rake.png"
     }
   }

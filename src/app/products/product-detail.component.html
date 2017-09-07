@@ -2,6 +2,24 @@
   <div class='panel-heading'>
     {{pageTitle + ': ' + product.productName}}
   </div>
+  <div class='panel-body'>
+    <div style='display:block' style='margin-left:auto' style='margin-right:auto'>
+    <div class='table'>
+      <td>
+        <img [src]='product.imageUrl' [style.width.px]='imageWidth'/>
+      </td>
+      <td style='width:80px'>
+      </td>
+      <td>
+        <tr style='height:30px'><td>Product Code : </td><td>{{product.productCode}}<td></tr>
+        <tr style='height:30px'><td>Product Name : </td><td>{{product.productName}}<td></tr>
+        <tr style='height:30px'><td>Release Date : </td><td>{{product.releaseDate}}<td></tr>
+        <tr style='height:30px'><td>Product Price : </td><td>{{product.price}}<td></tr>
+        <tr style='height:30px'><td>Product Rating : </td><td><pm-star [rating]='product.starRating'></pm-star><td></tr>
+      <td>
+    </div>
+    </div>
+  </div>
   <div class='panel-footer'>
     <a class='btn btn-default' (click)='onBack()' style='width:80px'>
       <i class='glyphicon glyphicon-chevron-left'></i> Back
