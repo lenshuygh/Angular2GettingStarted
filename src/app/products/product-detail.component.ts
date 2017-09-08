@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { IProduct } from './product';
 import { ActivatedRoute, Router } from '@angular/router';
+
+import { IProduct } from './product';
+import { ProductService } from './product.service';
 
 @Component({
   templateUrl: './product-detail.component.html',
@@ -9,10 +11,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ProductDetailComponent implements OnInit {
   pageTitle: string = 'Product Detail';
   product: IProduct;
-  imageWidth: number = 180;
+  errorMessage: string;
 
   constructor(private _route: ActivatedRoute,
-              private _router: Router) { 
+              private _router: Router,
+            private _productService: ProductService) { 
     //console.log(this._route.snapshot.paramMap.get('id'));
 
   }
@@ -20,21 +23,17 @@ export class ProductDetailComponent implements OnInit {
   ngOnInit() {
     //let defines a block scoped Variable
     //the '+' sign in JS converts the string to a numeric id
-    let id = +this._route.snapshot.paramMap.get('id');
-    this.pageTitle += `: ${id}`;
-    this.product={
-      "productId": id,
-      "productName": "Leaf Rake",
-      "productCode": "GDN-0011",
-      "releaseDate": "March 19, 2016",
-      "description": "Leaf rake bla blaaa blaaah",
-      "price": 666,
-      "starRating": 3.5,
-      "imageUrl": "http://openclipart.org/image/300px/svg_to_png/26215/Anonymous_Leaf_Rake.png"
-    }
+    const id = +this._route.snapshot.paramMap.get('id');
+    this.getProduct(id);
   }
 
-  onBack(): void{
+  getProduct(id: number) {
+    this._productService.getProduct(id).subscribe(
+    product => this.product = product,
+    error => this.errorMessage = <any>error);
+  }
+
+  onBack(): void {
     this._router.navigate(['/products']);
   }
 
